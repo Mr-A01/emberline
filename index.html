@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emberline — An Independent Game Studio</title>
+<meta name="description" content="Emberline is an independent game studio crafting hand-painted worlds and human stories. Worlds, games, characters, stories, archive and journals — one interconnected universe.">
+<meta property="og:title" content="Emberline — An Independent Game Studio">
+<meta property="og:description" content="Every world starts with an idea. Explore the Emberline universe.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23E05A28' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23E05A28'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/fraunces@latest/index.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource-variable/instrument-sans@latest/index.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/space-mono@latest/400.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/space-mono@latest/700.css" rel="stylesheet">
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/fixes.css">
+</head>
+<body data-route="home">
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div id="loader" aria-hidden="true">
+  <svg viewBox="0 0 64 64"><circle class="lg-ring" cx="32" cy="32" r="24"/><circle class="lg-dot" cx="32" cy="32" r="4"/></svg>
+  <div id="load-word">kindling the spark</div>
+  <div id="load-count">000</div>
+</div>
+
+<header id="top-bar">
+  <a class="logo" href="#/" aria-label="Emberline home">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="16" r="3.4" fill="currentColor"/></svg>
+    EMBERLINE
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a class="nav-link" href="#/worlds" data-nav>WORLDS</a>
+    <a class="nav-link" href="#/games" data-nav>GAMES</a>
+    <a class="nav-link" href="#/stories" data-nav>STORIES</a>
+    <a class="nav-link" href="#/art" data-nav>ART</a>
+    <a class="nav-link" href="#/journal" data-nav>JOURNAL</a>
+    <a class="nav-link" href="#/studio" data-nav>STUDIO</a>
+    <a class="nav-link" href="#/careers" data-nav>CAREERS</a>
+  </nav>
+  <div class="bar-actions">
+    <button class="icon-btn" id="btn-search" aria-label="Open search">SEARCH</button>
+    <button class="icon-btn" id="btn-menu" aria-label="Open menu" aria-expanded="false"><span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>MENU</button>
+  </div>
+</header>
+
+<div id="hud" aria-hidden="true">
+  <span class="mono" id="hud-num">01 / 10</span>
+  <span id="hud-bar"><i id="hud-fill"></i></span>
+  <span id="hud-title">The Spark</span>
+</div>
+
+<div id="cursor" aria-hidden="true"><span class="c-ring"><span class="c-label"></span></span><span class="c-dot"></span></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<main id="main">
+<!-- ================= HOME (static, cinematic) ================= -->
+<div id="homeView">
+<section class="chapter" id="spark" data-chapter data-num="01" data-title="The Spark">
+  <div class="hero-pin">
+    <div class="hero-media" aria-hidden="true"><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/18bd97011-5b04-4fd9-b433-f40051e92cb2.png" alt="" fetchpriority="high"></div>
+    <canvas id="gl-hero" class="gl" aria-hidden="true"></canvas>
+    <div class="gl-fallback" style="right:6vw;top:16vh;width:min(34vmin,380px);height:min(34vmin,380px);position:absolute" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="hero-kicker mono">Emberline — an independent game studio</p>
+      <h1 class="hero-title" aria-label="Every world starts with an idea.">
+        <span class="line" aria-hidden="true">EVERY WORLD</span>
+        <span class="line" aria-hidden="true">STARTS WITH</span>
+        <span class="line" aria-hidden="true">AN IDEA.</span>
+      </h1>
+      <div class="hero-foot">
+        <div>
+          <p class="hero-sub">We craft hand-painted worlds and human stories. This is our universe — ten chapters to begin with, a thousand doors if you keep walking.</p>
+          <div class="hero-links">
+            <a href="#/discover" data-nav>START WITH DISCOVER →</a>
+            <a href="#/worlds" data-nav>ENTER THE WORLDS →</a>
+          </div>
+        </div>
+        <div class="scroll-cue mono">SCROLL<span class="cue-line"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="idea" data-chapter data-num="02" data-title="The Idea">
+  <div class="wrap">
+    <header class="ch-head" data-reveal>
+      <span class="ch-num mono">02</span><span class="ch-rule"></span><h2 class="ch-title">The Idea</h2><span class="ch-note mono">Paper before pixels</span>
+    </header>
+    <div class="idea-grid">
+      <div class="idea-sticky"><p class="statement">A world is not designed. <em>It is remembered</em> — until it feels true.</p></div>
+      <div class="idea-copy">
+        <p class="lede" data-reveal>Every Emberline world begins as a single sentence, handwritten on the worst paper we can find. If the sentence survives a week of arguments, it becomes a map. If the map survives a month, it becomes a world.</p>
+        <p data-reveal>We believe constraints are kind. One accent colour. One weather. One wound in the history of a place. From that small seed, everything else grows — architecture, cuisine, grief, festivals, the way a character stands when it rains.</p>
+        <figure class="idea-fig" data-reveal>
+          <div class="frame" data-clip><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/14faafbbf-8850-4749-bcd5-0958498e5e05.png" alt="Hands drawing a glowing map of an imaginary world by candlelight" loading="lazy" decoding="async"></div>
+          <figcaption class="mono">Fig. 02 — The first map of the Ashen Reach, drawn in one night.</figcaption>
+        </figure>
+        <p data-reveal>Nothing enters production until we can answer one question: what does this world want to say to the person holding the controller?</p>
+      </div>
+    </div>
+    <div class="kinetic" aria-label="Build worlds, people, stories.">
+      <div class="k-word"><span class="mask"><span class="mask-in"><u>BUILD</u></span></span><i>—</i></div>
+      <div class="k-word"><span class="mask"><span class="mask-in"><u>WORLDS,</u></span></span></div>
+      <div class="k-word"><span class="mask"><span class="mask-in"><u>PEOPLE,</u></span></span></div>
+      <div class="k-word"><span class="mask"><span class="mask-in"><u>STORIES.</u></span></span><i>in that order</i></div>
+    </div>
+  </div>
+</section>
+
+<div class="ember-rule wrap" aria-hidden="true"></div>
+
+<section class="chapter dark" id="making" data-chapter data-num="03" data-title="The Making">
+  <div class="wrap">
+    <header class="ch-head" data-reveal>
+      <span class="ch-num mono">03</span><span class="ch-rule"></span><h2 class="ch-title">The Making</h2><span class="ch-note mono">Craft, iteration, play</span>
+    </header>
+    <p class="lede" data-reveal style="color:var(--smoke-d);margin-bottom:8vh">Four phases, repeated until it hurts, then once more. We prototype on paper, we playtest on Fridays, and we cut anything that does not serve the story.</p>
+    <div class="phase" data-reveal><span class="ph-num">PH.01</span><h3 class="ph-title">Sketch</h3><p class="ph-desc">Weeks of thumbnails, references, and bad drawings on purpose. We search for the silhouette of a world before its details.</p><svg class="ph-squig" viewBox="0 0 600 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 13 C 40 2, 70 24, 110 13 S 180 2, 220 13 S 290 24, 330 13 S 400 2, 440 13 S 510 24, 600 13"/></svg></div>
+    <div class="phase" data-reveal><span class="ph-num">PH.02</span><h3 class="ph-title">Prototype</h3><p class="ph-desc">Grey boxes and borrowed assets. A mechanic must be fun as a capsule with a lantern on it, or it will never be fun dressed up.</p><svg class="ph-squig" viewBox="0 0 600 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 13 C 40 24, 70 2, 110 13 S 180 24, 220 13 S 290 2, 330 13 S 400 24, 440 13 S 510 2, 600 13"/></svg></div>
+    <div class="phase" data-reveal><span class="ph-num">PH.03</span><h3 class="ph-title">Play</h3><p class="ph-desc">Every Friday, the whole studio plays the build. Every Friday, something we loved breaks. That is the point.</p><svg class="ph-squig" viewBox="0 0 600 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 13 C 40 2, 70 24, 110 13 S 180 2, 220 13 S 290 24, 330 13 S 400 2, 440 13 S 510 24, 600 13"/></svg></div>
+    <div class="phase" data-reveal><span class="ph-num">PH.04</span><h3 class="ph-title">Polish</h3><p class="ph-desc">The last ten percent takes forty percent of the time. Footsteps on black sand. The weight of a door. The pause before a line is spoken.</p><svg class="ph-squig" viewBox="0 0 600 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 13 C 40 24, 70 2, 110 13 S 180 24, 220 13 S 290 2, 330 13 S 400 24, 440 13 S 510 2, 600 13"/></svg></div>
+    <div id="games-home">
+      <div class="frame game-poster" data-clip data-reveal><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1a86646f4-6f66-46af-8c70-271551749c2a.png" alt="Key art of Sunderlight" loading="lazy" decoding="async"></div>
+      <div>
+        <p class="mono" style="color:var(--ember);margin-bottom:18px" data-reveal>Featured world — in production</p>
+        <h3 class="game-title" data-reveal>Sunder&shy;light</h3>
+        <p class="lede" data-reveal style="color:var(--smoke-d);margin-top:22px">A story-driven adventure about carrying the last light through a world that chose the dark. Walk the ember rivers, keep the flame, and decide who it is for.</p>
+        <div class="game-meta" data-reveal>
+          <div><span class="mono">Genre</span>Adventure · Narrative</div>
+          <div><span class="mono">Platforms</span>PC · PS5 · XSX</div>
+          <div><span class="mono">Release</span>2027</div>
+        </div>
+        <div class="game-actions" data-reveal>
+          <a class="btn solid" href="#/games/sunderlight" data-nav>ENTER THE GAME <span class="arr">→</span></a>
+          <button class="btn" id="btn-reel" data-cursor="PLAY">▶ WATCH THE REEL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="worlds-home" data-chapter data-num="04" data-title="The Worlds">
+  <div class="w-pin">
+    <div class="w-track" id="w-track">
+      <div class="w-intro">
+        <header class="ch-head" style="margin-bottom:4vh"><span class="ch-num mono">04</span><span class="ch-rule"></span><h2 class="ch-title">The Worlds</h2></header>
+        <p class="statement" style="font-size:clamp(2rem,4.4vw,4rem)">Four skies,<br><em>one horizon.</em></p>
+        <canvas id="gl-compass" class="gl" aria-hidden="true"></canvas>
+        <div class="gl-fallback" style="position:relative;inset:auto;width:min(24vmin,260px);height:min(24vmin,260px);margin-top:4vh" aria-hidden="true"></div>
+      </div>
+      <article class="w-panel" data-world="ashen" tabindex="0" role="button" data-cursor="OPEN" aria-label="Open the Ashen Reach">
+        <div class="frame"><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/14078654d-f086-4e20-9671-5bc458e1d242.png" alt="The Ashen Reach" loading="lazy" decoding="async"></div>
+        <div class="w-meta"><h3 class="w-name">The Ashen Reach</h3><span class="w-idx">W.01</span></div>
+        <p class="w-tag mono">Ember · Volcanic · First fire</p>
+        <p class="w-blurb">Black glass plains and rivers of ember. The Reach is where the first fire was lit — and where it refuses to die.</p>
+      </article>
+      <article class="w-panel" data-world="verdigris" tabindex="0" role="button" data-cursor="OPEN" aria-label="Open the Verdigris Deep">
+        <div class="frame"><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1bdf1a626-7c82-4472-a57d-fe2510ac47d3.png" alt="The Verdigris Deep" loading="lazy" decoding="async"></div>
+        <div class="w-meta"><h3 class="w-name">The Verdigris Deep</h3><span class="w-idx">W.02</span></div>
+        <p class="w-tag mono">Tide · Bronze · Memory</p>
+        <p class="w-blurb">A bronze city that chose to sink rather than surrender. Light falls through water like memory.</p>
+      </article>
+      <article class="w-panel" data-world="loom" tabindex="0" role="button" data-cursor="OPEN" aria-label="Open the Loomlands">
+        <div class="frame"><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1817556d6-3cbd-40e1-a169-4125c5989947.png" alt="The Loomlands" loading="lazy" decoding="async"></div>
+        <div class="w-meta"><h3 class="w-name">The Loomlands</h3><span class="w-idx">W.03</span></div>
+        <p class="w-tag mono">Sky · Thread · Promise</p>
+        <p class="w-blurb">Islands stitched together by golden thread. Every bridge is a promise between two skies.</p>
+      </article>
+      <article class="w-panel" data-world="pale" tabindex="0" role="button" data-cursor="OPEN" aria-label="Open Pale Signal">
+        <div class="frame"><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1ff5a1c54-a99e-4bdd-bc43-76398c91633a.png" alt="Pale Signal" loading="lazy" decoding="async"></div>
+        <div class="w-meta"><h3 class="w-name">Pale Signal</h3><span class="w-idx">W.04</span></div>
+        <p class="w-tag mono">Ice · Aurora · Listening</p>
+        <p class="w-blurb">An observatory at the edge of the ice, listening for a voice the sky forgot to send.</p>
+      </article>
+      <div class="w-outro">
+        <p class="statement" style="font-size:clamp(1.6rem,3vw,2.6rem)">Every world has a door. <em>Walk through one.</em></p>
+        <p style="margin:22px 0 30px;color:var(--smoke-d)">Each world page holds its history, locations, people and art — a place to wander, not a brochure.</p>
+        <a class="btn" href="#/worlds" data-nav>OPEN THE WORLDS EXPLORER <span class="arr">→</span></a>
+      </div>
+    </div>
+    <div id="w-progress" aria-hidden="true"><i id="w-fill"></i></div>
+    <span class="w-hint mono" aria-hidden="true">SCROLL →</span>
+  </div>
+</section>
+
+<section class="chapter tint" id="characters-home" data-chapter data-num="05" data-title="The Characters">
+  <div class="wrap">
+    <header class="ch-head" data-reveal>
+      <span class="ch-num mono">05</span><span class="ch-rule"></span><h2 class="ch-title">The Characters</h2><span class="ch-note mono">The people who carry the light</span>
+    </header>
+    <div class="char">
+      <div class="frame char-frame" data-clip data-reveal><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/19c81ed14-7de4-405d-86d5-5d97eb02c7b8.png" alt="Painted portrait of Mirel, the lantern-keeper" loading="lazy" decoding="async"></div>
+      <div>
+        <span class="char-idx mono">C.01 — Sunderlight</span>
+        <h3 class="char-name" data-reveal>Mirel</h3>
+        <p class="char-role mono" data-reveal>The Lantern-Keeper</p>
+        <p class="char-quote" data-reveal>Someone has to keep the light while the world decides.”</p>
+        <p class="char-bio" data-reveal>Mirel has outlived three governments and one god. She keeps the last public lantern in the Reach, and charges travellers nothing but a true answer.</p>
+        <a class="char-link mono" href="#/characters/mirel" data-nav data-reveal>OPEN HER DOSSIER →</a>
+      </div>
+    </div>
+    <div class="char">
+      <div class="frame char-frame" data-clip data-reveal><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1ca094759-dfa9-46ee-9de3-230abb72bd9b.png" alt="Painted portrait of Aldous Vane, the cartographer" loading="lazy" decoding="async"></div>
+      <div>
+        <span class="char-idx mono">C.02 — Sunderlight</span>
+        <h3 class="char-name" data-reveal>Aldous Vane</h3>
+        <p class="char-role mono" data-reveal>The Cartographer</p>
+        <p class="char-quote" data-reveal>A map is a promise you draw before you know the road.”</p>
+        <p class="char-bio" data-reveal>Aldous maps places that do not exist yet, and insists they are merely late. Our level design began as his fictional atlases.</p>
+        <a class="char-link mono" href="#/characters/aldous" data-nav data-reveal>OPEN HIS DOSSIER →</a>
+      </div>
+    </div>
+    <div class="char">
+      <div class="frame char-frame" data-clip data-reveal><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/12d0a5c1c-c486-4d23-b811-b36259647fa0.png" alt="Painted portrait of Vesper, the masked scout" loading="lazy" decoding="async"></div>
+      <div>
+        <span class="char-idx mono">C.03 — Sunderlight</span>
+        <h3 class="char-name" data-reveal>Vesper</h3>
+        <p class="char-role mono" data-reveal>The Masked Scout</p>
+        <p class="char-quote" data-reveal>I wear the fox so the fox can be brave.”</p>
+        <p class="char-bio" data-reveal>Youngest scout of the Loomlands, keeper of a cracked porcelain mask they refuse to replace. Vesper walks first into every dark place.</p>
+        <a class="char-link mono" href="#/characters/vesper" data-nav data-reveal>OPEN THEIR DOSSIER →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="craft" data-chapter data-num="06" data-title="The Craft">
+  <div class="wrap">
+    <header class="ch-head" data-reveal>
+      <span class="ch-num mono">06</span><span class="ch-rule"></span><h2 class="ch-title">The Craft</h2><span class="ch-note mono">Materials of a world</span>
+    </header>
+    <p class="lede" data-reveal style="margin-bottom:8vh">Pigment, string, wood and light. We build physical maquettes and paint real studies before anything touches a screen. <a href="#/art" data-nav style="color:var(--ember-deep)">Open the full gallery →</a></p>
+    <div class="g-grid">
+      <button class="g-item g1" data-cursor="VIEW" data-full="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1648003be-17fc-44e7-919f-4f0dd3ff85c2.png" data-title="The Reference Wall" data-meta="Production still · Oslo studio, 2026"><span class="frame"><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1648003be-17fc-44e7-919f-4f0dd3ff85c2.png" alt="Studio reference wall" loading="lazy" decoding="async"></span><figcaption><span class="g-t">The Reference Wall</span><span class="mono">Production still</span></figcaption></button>
+      <button class="g-item g2" data-cursor="VIEW" data-full="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1ff5a1c54-a99e-4bdd-bc43-76398c91633a.png" data-title="Pale Signal — Light Study" data-meta="Environment · digital painting"><span class="frame"><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1ff5a1c54-a99e-4bdd-bc43-76398c91633a.png" alt="Pale Signal light study" loading="lazy" decoding="async"></span><figcaption><span class="g-t">Pale Signal — Light Study</span><span class="mono">Environment</span></figcaption></button>
+      <button class="g-item g3" data-cursor="VIEW" data-full="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/14078654d-f086-4e20-9671-5bc458e1d242.png" data-title="Ember River — Color Script" data-meta="Color script · Ashen Reach"><span class="frame"><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/14078654d-f086-4e20-9671-5bc458e1d242.png" alt="Ember river color script" loading="lazy" decoding="async"></span><figcaption><span class="g-t">Ember River</span><span class="mono">Color script</span></figcaption></button>
+      <button class="g-item g4" data-cursor="VIEW" data-full="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1bdf1a626-7c82-4472-a57d-fe2510ac47d3.png" data-title="The Deep — Atmosphere Test" data-meta="Environment · Verdigris"><span class="frame"><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1bdf1a626-7c82-4472-a57d-fe2510ac47d3.png" alt="Verdigris atmosphere test" loading="lazy" decoding="async"></span><figcaption><span class="g-t">The Deep</span><span class="mono">Atmosphere</span></figcaption></button>
+      <button class="g-item g5" data-cursor="VIEW" data-full="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1817556d6-3cbd-40e1-a169-4125c5989947.png" data-title="Thread Bridges — Composition" data-meta="Composition · Loomlands"><span class="frame"><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1817556d6-3cbd-40e1-a169-4125c5989947.png" alt="Thread bridges composition" loading="lazy" decoding="async"></span><figcaption><span class="g-t">Thread Bridges</span><span class="mono">Composition</span></figcaption></button>
+      <button class="g-item g6" data-cursor="VIEW" data-full="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/14d52a894-a53f-41f9-bde9-4f0dd3ff85c8.png" data-title="The Crossing — Keyframe" data-meta="Keyframe · narrative beat 07"><span class="frame"><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/14d52a894-a53f-41f9-bde9-4f0dd3ff85c8.png" alt="The Crossing keyframe" loading="lazy" decoding="async"></span><figcaption><span class="g-t">The Crossing</span><span class="mono">Keyframe</span></figcaption></button>
+    </div>
+  </div>
+</section>
+
+<section class="chapter dark2" id="people" data-chapter data-num="07" data-title="The People">
+  <div class="wrap">
+    <header class="ch-head" data-reveal>
+      <span class="ch-num mono">07</span><span class="ch-rule"></span><h2 class="ch-title">The People</h2><span class="ch-note mono">Hands behind the worlds</span>
+    </header>
+    <p class="manifesto" data-reveal>We are forty-one makers in twelve countries, gathered around one stove. We hire <em>humans first</em> — portfolios second — because a world can only be as kind as the room it was made in.</p>
+    <p style="margin-top:34px" data-reveal><a class="btn ghostd" href="#/studio" data-nav>MEET THE FULL STUDIO <span class="arr">→</span></a></p>
+    <div id="careers-home">
+      <h3 data-reveal>Open roles</h3>
+      <div id="home-jobs"></div>
+      <p class="mono" style="margin-top:26px;color:var(--smoke-d)" data-reveal>Don't see your role? <a href="#/contact" data-nav style="color:var(--ember)">Write to us anyway.</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="stories-home" data-chapter data-num="08" data-title="The Stories">
+  <div class="wrap">
+    <header class="ch-head" data-reveal>
+      <span class="ch-num mono">08</span><span class="ch-rule"></span><h2 class="ch-title">The Stories</h2><span class="ch-note mono">A magazine of small fires</span>
+    </header>
+    <div class="pq-band">
+      <p class="pq" data-reveal>A game is a letter you write to a stranger, <b>hoping they will feel less alone</b> on the other side of the glass.</p>
+      <p class="pq-cite mono" data-reveal>— Ines Marek, Creative Director</p>
+    </div>
+    <div id="home-stories"></div>
+    <p style="margin-top:6vh" data-reveal><a class="btn" href="#/stories" data-nav>OPEN THE FULL MAGAZINE <span class="arr">→</span></a></p>
+  </div>
+</section>
+
+<section class="chapter dark" id="future" data-chapter data-num="09" data-title="The Future" style="overflow:hidden">
+  <canvas id="embers-future" aria-hidden="true"></canvas>
+  <div class="wrap" style="position:relative">
+    <header class="ch-head" data-reveal>
+      <span class="ch-num mono">09</span><span class="ch-rule"></span><h2 class="ch-title">The Future</h2><span class="ch-note mono">What we are building toward</span>
+    </header>
+    <p class="statement" data-reveal style="max-width:20em">Slow games, <em>long flames.</em> We plan in decades, not roadmaps.</p>
+    <div class="tl">
+      <div class="tl-line" aria-hidden="true"><i id="tl-fill"></i></div>
+      <div class="tl-item" data-reveal><span class="tl-year">2019</span><p class="tl-text">Three friends, one garage, a jam prototype called “Cinder”.</p></div>
+      <div class="tl-item" data-reveal><span class="tl-year">2021</span><p class="tl-text">Emberline Studio founded in Oslo. Nine people, one stove.</p></div>
+      <div class="tl-item" data-reveal><span class="tl-year">2023</span><p class="tl-text">Sunderlight announced. 40,000 wishlists in the first week.</p></div>
+      <div class="tl-item" data-reveal><span class="tl-year">2025</span><p class="tl-text">Vertical slice complete. The wind system is built by hand.</p></div>
+      <div class="tl-item" data-reveal><span class="tl-year">2026</span><p class="tl-text">Full production. Forty-one makers, twelve countries.</p><p class="tl-sub">You are here.</p></div>
+      <div class="tl-item" data-reveal><span class="tl-year">2027</span><p class="tl-text">Sunderlight releases on PC and console.</p></div>
+      <div class="tl-item" data-reveal><span class="tl-year">2028</span><p class="tl-text">The next world begins sketching.</p></div>
+    </div>
+    <p style="margin-top:5vh" data-reveal><a class="btn ghostd" href="#/timeline" data-nav>EXPLORE THE FULL TIMELINE <span class="arr">→</span></a></p>
+  </div>
+</section>
+
+<section id="next" data-chapter data-num="10" data-title="The Next World">
+  <div class="next-hero">
+    <div class="next-media"><img src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/10eae93d0-e9ad-4367-8cc8-737262a700e0.png" alt="A stone doorway glowing with warm light on a dark plain" loading="lazy" decoding="async"></div>
+    <canvas id="gl-seed" class="gl" style="right:8vw;top:14vh;width:min(26vmin,300px);height:min(26vmin,300px)" aria-hidden="true"></canvas>
+    <div class="gl-fallback" style="right:8vw;top:14vh;width:min(26vmin,300px);height:min(26vmin,300px);position:absolute" aria-hidden="true"></div>
+    <div class="next-inner">
+      <div class="wrap">
+        <p class="mono" style="color:var(--ember);margin-bottom:20px" data-reveal>10 — The Next World</p>
+        <h2 class="statement">The next world<br>is already <em>forming.</em></h2>
+        <div class="next-cta" data-reveal>
+          <a class="btn solid magnetic" href="#/contact" data-nav>START A CONVERSATION <span class="arr">→</span></a>
+          <a class="btn magnetic ghostd" href="#/careers" data-nav>JOIN THE STUDIO</a>
+          <a class="btn magnetic ghostd" href="#/discover" data-nav>SURPRISE ME</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="contact" class="dark">
+    <div class="wrap contact-grid" style="display:grid;grid-template-columns:.9fr 1.1fr;gap:6vw">
+      <div>
+        <h3 style="font-family:var(--disp);font-weight:340;font-size:clamp(2rem,4vw,3.4rem);margin-bottom:26px" data-reveal>Write to us.<br>We answer everything.</h3>
+        <p data-reveal style="color:var(--smoke-d);max-width:40ch">Press, partnerships, portfolios or a single honest question — the inbox by the stove is always open.</p>
+        <div style="margin-top:34px;display:grid;gap:14px;color:var(--smoke-d)" data-reveal>
+          <a class="mono" href="mailto:hello@emberline.studio">hello@emberline.studio</a>
+          <a class="mono" href="mailto:press@emberline.studio">press@emberline.studio</a>
+          <span class="mono">Grünerløkka, Oslo — by appointment</span>
+        </div>
+      </div>
+      <div>
+        <form id="contact-form" novalidate>
+          <div class="field"><label for="f-topic">I am writing about</label>
+            <select id="f-topic"><option>General</option><option>Business</option><option>Press</option><option>Partnership</option><option>Careers</option></select></div>
+          <div class="field" id="fld-name"><label for="f-name">Your name</label><input id="f-name" type="text" autocomplete="name"><span class="f-err">REQUIRED</span></div>
+          <div class="field" id="fld-email"><label for="f-email">Email</label><input id="f-email" type="email" autocomplete="email"><span class="f-err">VALID EMAIL REQUIRED</span></div>
+          <div class="field" id="fld-msg"><label for="f-msg">Message</label><textarea id="f-msg"></textarea><span class="f-err">A FEW WORDS, AT LEAST</span></div>
+          <button class="btn solid" id="f-submit" type="submit">SEND THE LETTER <span class="arr">→</span></button>
+        </form>
+        <div id="form-ok" class="form-ok" role="status" style="display:none;border-color:var(--line-d)">
+          <span class="mono">RECEIVED — THANK YOU</span>
+          <p>Your letter is on the desk by the stove. We reply within two days, usually with more questions than answers.</p>
+          <button class="btn" id="form-again" style="margin-top:22px">WRITE ANOTHER</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- /homeView -->
+
+<div id="app" style="display:none"></div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-col"><h4>Explore</h4><a href="#/discover" data-nav>Discover</a><a href="#/worlds" data-nav>Worlds</a><a href="#/games" data-nav>Games</a><a href="#/characters" data-nav>Characters</a><a href="#/art" data-nav>Art Gallery</a><a href="#/collections" data-nav>Collections</a></div>
+      <div class="f-col"><h4>Library</h4><a href="#/stories" data-nav>Stories</a><a href="#/journal" data-nav>Journal</a><a href="#/news" data-nav>News</a><a href="#/archive" data-nav>Archive</a><a href="#/timeline" data-nav>Timeline</a><a href="#/media" data-nav>Media Hub</a></div>
+      <div class="f-col"><h4>Studio</h4><a href="#/studio" data-nav>About & Philosophy</a><a href="#/studio" data-nav>Team</a><a href="#/careers" data-nav>Careers</a><a href="#/press" data-nav>Press Kit</a><a href="#/contact" data-nav>Contact</a></div>
+      <div class="f-col"><h4>Yours</h4><a href="#/saved" data-nav>Saved content</a><a href="#/search" data-nav>Search everything</a><a href="#/" data-nav>Start over</a></div>
+      <div class="f-col"><h4>Kindling — our letter</h4>
+        <form class="news-form" id="news-form"><input type="email" placeholder="your@email.com" aria-label="Email for newsletter" required><button type="submit">JOIN →</button></form>
+        <p id="news-ok" class="mono">WELCOME TO THE FIRE.</p>
+      </div>
+    </div>
+    <div class="f-word" aria-hidden="true">Emberline</div>
+    <div class="f-base">
+      <span class="mono">© 2026 Emberline Studio AS</span>
+      <span class="mono"><button class="legal-link" data-legal="privacy" style="font:inherit;letter-spacing:inherit">PRIVACY</button> · <button class="legal-link" data-legal="terms" style="font:inherit;letter-spacing:inherit">TERMS</button> · <button class="legal-link" data-legal="access" style="font:inherit;letter-spacing:inherit">ACCESSIBILITY</button></span>
+      <span class="mono">MADE SLOWLY IN OSLO</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MENU -->
+<div class="overlay" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
+  <button class="ov-close" id="menu-close">CLOSE ✕</button>
+  <div class="menu-grid">
+    <nav class="menu-links" aria-label="Menu primary">
+      <a class="menu-link" href="#/discover" data-nav data-preview="finale"><span class="m-idx">★</span>DISCOVER</a>
+      <a class="menu-link" href="#/worlds" data-nav data-preview="loom"><span class="m-idx">01</span>WORLDS</a>
+      <a class="menu-link" href="#/games" data-nav data-preview="poster"><span class="m-idx">02</span>GAMES</a>
+      <a class="menu-link" href="#/stories" data-nav data-preview="bridge"><span class="m-idx">03</span>STORIES</a>
+      <a class="menu-link" href="#/characters" data-nav data-preview="mirel"><span class="m-idx">04</span>CHARACTERS</a>
+      <a class="menu-link" href="#/art" data-nav data-preview="wall"><span class="m-idx">05</span>ART</a>
+      <a class="menu-link" href="#/journal" data-nav data-preview="idea"><span class="m-idx">06</span>JOURNAL</a>
+      <a class="menu-link" href="#/archive" data-nav data-preview="ashen"><span class="m-idx">07</span>ARCHIVE</a>
+      <a class="menu-link" href="#/timeline" data-nav data-preview="pale"><span class="m-idx">08</span>TIMELINE</a>
+      <a class="menu-link" href="#/media" data-nav data-preview="verdigris"><span class="m-idx">09</span>MEDIA</a>
+      <a class="menu-link" href="#/news" data-nav data-preview="ashen"><span class="m-idx">10</span>NEWS</a>
+      <a class="menu-link" href="#/press" data-nav data-preview="poster"><span class="m-idx">11</span>PRESS</a>
+      <a class="menu-link" href="#/studio" data-nav data-preview="wall"><span class="m-idx">12</span>STUDIO</a>
+      <a class="menu-link" href="#/careers" data-nav data-preview="idea"><span class="m-idx">13</span>CAREERS</a>
+      <a class="menu-link" href="#/collections" data-nav data-preview="loom"><span class="m-idx">14</span>COLLECTIONS</a>
+      <a class="menu-link" href="#/saved" data-nav data-preview="finale"><span class="m-idx">♥</span>SAVED</a>
+    </nav>
+    <div class="menu-preview" aria-hidden="true">
+      <img data-p="finale" src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/10eae93d0-e9ad-4367-8cc8-737262a700e0.png" alt="">
+      <img data-p="loom" src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1817556d6-3cbd-40e1-a169-4125c5989947.png" alt="">
+      <img data-p="poster" src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1a86646f4-6f66-46af-8c70-271551749c2a.png" alt="">
+      <img data-p="bridge" src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/14d52a894-a53f-41f9-bde9-4f0dd3ff85c8.png" alt="">
+      <img data-p="mirel" src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/19c81ed14-7de4-405d-86d5-5d97eb02c7b8.png" alt="">
+      <img data-p="wall" src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1648003be-17fc-44e7-919f-4f0dd3ff85c2.png" alt="">
+      <img data-p="idea" src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/14faafbbf-8850-4749-bcd5-0958498e5e05.png" alt="">
+      <img data-p="ashen" src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/14078654d-f086-4e20-9671-5bc458e1d242.png" alt="">
+      <img data-p="pale" src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1ff5a1c54-a99e-4bdd-bc43-76398c91633a.png" alt="">
+      <img data-p="verdigris" src="https://image.qwenlm.ai/public_source/81492f1f-4433-40a2-ab08-5bb128616fda/1bdf1a626-7c82-4472-a57d-fe2510ac47d3.png" alt="">
+    </div>
+    <div class="menu-foot">
+      <a href="#/contact" data-nav>CONTACT</a><a href="#/press" data-nav>PRESS</a><a href="#/search" data-nav>SEARCH</a><a href="#" onclick="return false">STEAM ↗</a><a href="#" onclick="return false">YOUTUBE ↗</a><a href="#" onclick="return false">BLUESKY ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="overlay" id="search-ov" role="dialog" aria-modal="true" aria-label="Search">
+  <button class="ov-close" id="search-close">CLOSE ✕</button>
+  <div class="search-box"><div id="ov-search-root" class="search-panel"></div></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Artwork viewer">
+  <button class="ov-close" id="lb-close">CLOSE ✕</button>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-bar">
+    <span id="lb-title">—</span><span id="lb-meta" class="mono">—</span><span id="lb-count" class="mono">1 / 1</span>
+    <div class="lb-nav"><button id="lb-prev" aria-label="Previous">←</button><button id="lb-next" aria-label="Next">→</button></div>
+  </div>
+</div>
+
+<!-- REEL -->
+<div class="overlay modal" id="reel-modal" role="dialog" aria-modal="true" aria-label="Video reel">
+  <div class="modal-card" style="max-width:1100px">
+    <button class="ov-close" id="reel-close">CLOSE ✕</button>
+    <div class="reel-frame reel-bars">
+      <img id="reel-a" src="" alt="" class="show"><img id="reel-b" src="" alt="">
+      <span class="reel-cap mono" id="reel-cap">SUNDERLIGHT — ANIMATIC REEL</span>
+    </div>
+    <div class="reel-ctl">
+      <button class="btn" id="reel-toggle">PAUSE</button>
+      <div id="reel-bar"><i id="reel-fill"></i></div>
+      <span class="mono" id="reel-count" style="color:var(--smoke-d)">01 / 05</span>
+    </div>
+  </div>
+</div>
+
+<!-- LEGAL -->
+<div class="overlay modal" id="legal-modal" role="dialog" aria-modal="true" aria-label="Legal information">
+  <div class="modal-card" style="max-width:720px">
+    <button class="ov-close" id="lm-close">CLOSE ✕</button>
+    <div class="mc-body"><h3 class="mc-title" id="lm-title">—</h3><div id="lm-body"></div></div>
+  </div>
+</div>
+
+<div id="curtain" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="js/app.js"></script>
+<script type="module" src="js/gl.js"></script>
+</body>
+</html>
